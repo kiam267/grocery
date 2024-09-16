@@ -32,6 +32,8 @@ function GetLocation() {
             )
               .then((response) => response.json())
               .then((data) => {
+                console.log(data, 'google api');
+
                 setLocation((pre) => {
                   return {
                     ...pre,
@@ -49,6 +51,7 @@ function GetLocation() {
             fetch('https://ipapi.co/json')
               .then((response) => response.json())
               .then((data) => {
+                console.log(data, 'ipapi api');
                 setLocation((pre) => {
                   return {
                     ...pre,
