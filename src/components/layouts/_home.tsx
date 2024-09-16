@@ -23,14 +23,17 @@ export default function HomeLayout({
   );
   return (
     <div className="flex min-h-screen flex-col bg-gray-100 transition-colors duration-150">
-      {['minimal', 'compact'].includes(layout) ? (
+      {/* CHANGED: This section need to modify */}
+      {/* {['minimal', 'compact'].includes(layout) ? (
         <HeaderMinimal layout={layout} />
       ) : (
         <Header layout={layout} />
-      )}
-      
+      )} */}
+      {/* NOTE: jsut use this  */}
+      <Header layout={layout} />
+
       <div className="min-h-screen">{children}</div>
-      
+
       {['compact'].includes(layout) && <Footer />}
       <MobileNavigation>
         <motion.button

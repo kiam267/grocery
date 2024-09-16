@@ -41,6 +41,7 @@ import { useShopMaintenanceEvent } from '@/framework/shop';
 import { Menu } from '@headlessui/react';
 import { ArrowDownIcon } from '../icons/arrow-down';
 import Location from '../location/location';
+import GetLocation from '../location/location';
 const Search = dynamic(() => import('@/components/ui/search/search'));
 const AuthorizedMenu = dynamic(() => import('./menu/authorized-menu'), {
   ssr: false,
@@ -210,16 +211,9 @@ const Header = ({ layout }: { layout?: string }) => {
                   className="flex items-center gap-2 focus:!shadow-none focus:!ring-0 border rounded-lg cursor-text"
                   // onClick={() => setOpenDropdown(!openDropdown)}
                 >
-                  <span className="flex items-center gap-1 text-base text-accent">
-                    <MapPin className="w-4 h-4 " />
-                    <Location />
-                  </span>
-                  <ArrowDownIcon
-                    className={cn(
-                      'mt-1 h-2.5 w-2.5 text-accent transition-all',
-                      openDropdown ? 'rotate-180' : '',
-                    )}
-                  />
+                  {/*Note: I am adding  get location */}
+                    <GetLocation />
+                 
                 </Button>
               </div>
             </div>

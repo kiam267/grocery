@@ -1,32 +1,105 @@
 'use client';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
+import LocationComponent from './location-2';
+import { MapPin, MapPinNew } from '../icons/map-pin';
 
-function Location() {
-  const [city, setCity] = useState<string>('');
-  useEffect(() => {
-    axios
-      .get(
-        `https://ipgeolocation.abstractapi.com/v1/?api_key=${'a36a4994e3564ebda59bf8ba8cb24a86'}&ip_address=`,
-      )
-      .then((response) => {
-        console.log(response.data);
+function GetLocation() {
+  const [location, setLocation] = useState<{
+    lat: null | number;
+    lon: null | number;
+    city: string;
+    country: string;
+  }>({
+    lat: null,
+    lon: null,
+    city: '',
+    country: '',
+  });
+  const [loading, setLoading] = useState(true);
+  const [notfound, setNotFound] = useState(false);
 
-        setCity(response.data?.city);
-      })
-      .catch((error) => {
-        setCity('error');
-      });
+  const fetchData = useCallback(async () => {
+    try {
+      setLoading(true);
+
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+          (position) => {
+            const { latitude, longitude } = position.coords;
+            fetch(
+              `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`,
+            )
+              .then((response) => response.json())
+              .then((data) => {
+                setLocation((pre) => {
+                  return {
+                    ...pre,
+                    lat: latitude,
+                    lon: longitude,
+                    city: data.city,
+                    country: data.countryName,
+                  };
+                });
+              });
+          },
+
+          // if the user is not allowed the location then work this way
+          (error) => {
+            fetch('https://ipapi.co/json')
+              .then((response) => response.json())
+              .then((data) => {
+                setLocation((pre) => {
+                  return {
+                    ...pre,
+                    city: data.city,
+                    country: data.country_name,
+                  };
+                });
+              });
+          },
+          {
+            enableHighAccuracy: true,
+            timeout: 5000,
+            maximumAge: 0,
+          },
+        );
+      } else {
+        setNotFound(true);
+      }
+    } catch (error) {
+      setNotFound(true);
+    } finally {
+      setLoading(false);
+    }
   }, []);
 
+  useEffect(() => {
+    fetchData();
+  }, [fetchData]);
+
+  if (loading) {
+    return <div className="font-bold">Loading...</div>;
+  }
+
+  if (notfound || location.city === null) {
+    return (
+      <span className="flex items-center gap-1 text-base text-accent">
+        <MapPinNew className="w-4 h-4 " />
+        <p className="font-bold">not found</p>
+      </span>
+    );
+  }
   return (
     <div>
-      {
-        city === 'error' && city === null
-        ? 'Location information could not be retrieved'
-        : `You are currently in ${city}`}
+      <span className="flex items-center gap-1 text-base text-accent">
+        <MapPinNew className="w-4 h-4 " />
+        <p className="font-bold ">
+          {location.city}, {location.country}
+        </p>
+      </span>
     </div>
   );
 }
 
-export default Location;
+export default GetLocation;
