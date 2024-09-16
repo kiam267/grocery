@@ -204,7 +204,7 @@ const Header = ({ layout }: { layout?: string }) => {
               </div>
             ) : null} */}
 
-              <div className="hidden ltr:ml-10 ltr:mr-auto rtl:mr-10 rtl:ml-auto xl:block">
+              <div className="ltr:ml-10 ltr:mr-auto rtl:mr-10 rtl:ml-auto xl:block">
                 {/* <GroupsDropdownMenu /> */}
                 <Button
                   variant="custom"
