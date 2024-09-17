@@ -55,7 +55,7 @@ const DISCOUNT_SHOP = [
 function BannerWithDicount() {
   return (
     <div className={'textClass relative  flex flex-col  justify-center my-10'}>
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 mt-16 px-10">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 mt-16  px-2 lg:px-6">
         {/* Left side large image */}
         <div className="lg:col-span-2 flex flex-col items-center relative">
           {DISCOUNT_SHOP.slice(0, 1).map((discountItem) => (
