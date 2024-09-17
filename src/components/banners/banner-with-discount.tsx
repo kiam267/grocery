@@ -37,7 +37,7 @@ const DISCOUNT_SHOP = [
     title: 'Start your daily shopping with some Organic food',
     link: 'https://shop-2.vercel.app/',
     discountContent: 'Healthy Food',
-    discountedPrice: '5% Off',
+    discountedPrice: '45% Off',
     image: '/hero/discount-image-2.jpg',
     button: 'Shop Now ',
   },
@@ -52,35 +52,42 @@ const DISCOUNT_SHOP = [
   },
 ];
 
+//TODO: add some back behind the image
 function BannerWithDicount() {
   return (
-    <div className={'textClass relative  flex flex-col  justify-center my-10'}>
+    <div className={'textClass relative  flex flex-col  justify-center my-5'}>
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 mt-16  px-2 lg:px-6">
         {/* Left side large image */}
         <div className="lg:col-span-2 flex flex-col items-center relative">
           {DISCOUNT_SHOP.slice(0, 1).map((discountItem) => (
             <div
               key={discountItem.id}
-              className="relative w-full  min-h-[250px] rounded-xl"
+              className="relative w-full min-h-[250px] rounded-xl"
             >
-              <Image
-                className="w-full h-full shadow-sm rounded-lg"
-                loading="lazy"
-                width={400}
-                height={500}
-                src={discountItem.image}
-                alt={discountItem.title}
-                title={discountItem.title}
-              />
+              {/* Image with black overlay */}
+              <div className="relative">
+                <Image
+                  className="w-full h-full shadow-sm rounded-lg"
+                  loading="lazy"
+                  width={400}
+                  height={500}
+                  src={discountItem.image}
+                  alt={discountItem.title}
+                  title={discountItem.title}
+                />
+                {/* Black background overlay with opacity */}
+                <div className="absolute inset-0 bg-black opacity-5 rounded-lg"></div>
+              </div>
+
               {/* Content Overlay */}
-              <div className="absolute left-4 inset-y-0 flex items-center p-4 rounded-lg">
+              <div className="absolute left-4 inset-y-0 flex items-center p-4 rounded-lg z-10">
                 {/* Discount and Button */}
                 <div>
                   <div className="flex gap-4 items-center">
                     <p className="text-black/80 font-semibold">
                       {discountItem.discountContent}
                     </p>
-                    <div className="rounded-xl bg-red-100 p-1 text-[13px] font-bold text-red-600">
+                    <div className="rounded-xl bg-red-100 px-3 py-[2px] text-[13px] font-bold text-red-500">
                       {discountItem.discountedPrice}
                     </div>
                   </div>
@@ -119,7 +126,7 @@ function BannerWithDicount() {
               className="relative min-h-[250px] rounded-xl"
             >
               <Image
-                className="w-full h-full min-h-[250px] object-cover shadow-sm rounded-lg"
+                className=" w-full h-full min-h-[250px] object-cover shadow-sm rounded-lg"
                 loading="lazy"
                 src={discountItem.image}
                 alt={discountItem.title}
@@ -127,13 +134,14 @@ function BannerWithDicount() {
                 layout="fill"
                 objectFit="cover"
               />
+              <div className="absolute inset-0 bg-black opacity-10 rounded-lg"></div>
               <div className="absolute left-4 inset-y-0 flex items-center p-4 rounded-lg">
                 <div>
                   <div className="flex gap-4 items-center">
                     <p className="text-black/80 font-semibold">
                       {discountItem.discountContent}
                     </p>
-                    <div className="rounded-xl bg-red-100 p-1 text-[13px] font-bold text-red-600">
+                    <div className="rounded-xl bg-red-100 px-3 py-[2px] text-[13px] font-bold text-red-500">
                       {discountItem.discountedPrice}
                     </div>
                   </div>
