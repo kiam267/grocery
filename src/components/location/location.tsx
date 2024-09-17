@@ -1,7 +1,6 @@
 'use client';
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
-import LocationComponent from './location-2';
 import { MapPin, MapPinNew } from '../icons/map-pin';
 
 function GetLocation() {
@@ -98,7 +97,8 @@ function GetLocation() {
       <span className="flex items-center gap-1 text-base text-accent">
         <MapPinNew className="w-4 h-4 " />
         <p className="font-bold ">
-          {location.city}, {location.country}
+          <span> {location.city}</span>
+          <span className="hidden md:inline">, {location.country}</span>
         </p>
       </span>
     </div>

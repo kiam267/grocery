@@ -190,7 +190,7 @@ const Header = ({ layout }: { layout?: string }) => {
                 <span className="h-0.5 w-3/4 rounded bg-gray-600 transition-all group-hover:w-full" />
               </div>
             </motion.button>
-            <div className="flex shrink-0 grow-0 basis-auto flex-wrap items-center ltr:mr-auto rtl:ml-auto lg:w-auto lg:flex-nowrap">
+            <div className="flex md:justify-start  justify-between  shrink-0 grow-0 basis-auto flex-wrap items-center ltr:mr-auto rtl:ml-auto lg:w-auto lg:flex-nowrap w-full my-3">
               <Logo
                 className={cn(
                   'py-3',
@@ -212,8 +212,7 @@ const Header = ({ layout }: { layout?: string }) => {
                   // onClick={() => setOpenDropdown(!openDropdown)}
                 >
                   {/*Note: I am adding  get location */}
-                    <GetLocation />
-                 
+                  <GetLocation />
                 </Button>
               </div>
             </div>
@@ -311,7 +310,7 @@ const Header = ({ layout }: { layout?: string }) => {
                 </div>
                 <Link
                   href={Routes.becomeSeller}
-                  className="hidden h-9 shrink-0 items-center justify-center rounded border border-transparent bg-accent px-3 py-0 text-sm font-semibold leading-none text-light outline-none transition duration-300 ease-in-out hover:bg-accent-hover focus:shadow focus:outline-none focus:ring-1 focus:ring-accent-700 sm:inline-flex"
+                  className="hidden h-9 shrink-0 items-center justify-center rounded border border-transparent bg-accent px-3 py-0 text-sm font-semibold leading-none text-light outline-none transition duration-300 ease-in-out hover:bg-accent-hover focus:shadow focus:outline-none focus:ring-1 focus:ring-accent-700 lg:inline-flex"
                 >
                   {t('text-become-seller')}
                 </Link>

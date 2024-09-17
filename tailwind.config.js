@@ -167,6 +167,15 @@ module.exports = {
       transitionTimingFunction: {
         'in-expo': 'cubic-bezier(0.04, 0.62, 0.23, 0.98)',
       },
+      keyframes: {
+        slideLeftToRight: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(25px)' },
+        },
+      },
+      animation: {
+        'left-to-right': 'slideLeftToRight 2s linear infinite',
+      },
     },
   },
   plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],

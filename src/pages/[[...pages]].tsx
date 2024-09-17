@@ -9,6 +9,7 @@ import Seo from '@/components/seo/seo';
 import { useWindowSize } from '@/lib/use-window-size';
 import { getStaticPaths, getStaticProps } from '@/framework/home-pages.ssr';
 import { useType } from '@/framework/type';
+import HeorDiscount from '@/components/common/hero-discount';
 
 export { getStaticPaths, getStaticProps };
 
@@ -46,14 +47,19 @@ const Home: NextPageWithLayout<
     }
   }, [query.text, query.category]);
 
-
-  
   const Component = MAP_LAYOUT_TO_GROUP['default'];
   return (
     <>
-      <Seo title={type?.name as string} url={type?.slug as string} images={type?.banners} />
-      <Component variables={variables} />
-      
+      <Seo
+        title={type?.name as string}
+        url={type?.slug as string}
+        images={type?.banners}
+      />
+      {/* FIXME:  if all ok then fix the page .  */}
+      {/* <Component variables={variables} /> */}
+
+      <HeorDiscount layout="" variables={variables} />
+
       {!['compact', 'minimal'].includes(layout) && width > 1023 && (
         <CartCounterButton />
       )}

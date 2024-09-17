@@ -6,11 +6,15 @@ import { Element } from 'react-scroll';
 import Categories from '../categories/categories';
 import ProductGridHome from '../products/grids/home';
 import { HomePageProps } from '@/types';
+import BannerWithDicount from '../banners/banner-with-discount';
 
 function HeorDiscount({ variables }: HomePageProps) {
   return (
     <>
-      <Banner layout="classic" variables={variables.types} />
+      {/* CHANGED: This components need to delete  */}
+      {/* <Banner layout="classic" variables={variables.types} /> */}
+      {/* ADD: this banner */}
+      <BannerWithDicount />
       <PromotionSliders variables={variables.types} />
       <FilterBar variables={variables.categories} />
       <Element
