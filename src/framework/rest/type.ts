@@ -1,4 +1,4 @@
-import type { Type, TypeQueryOptions } from '@/types';
+import type { Type, TypeQueryOptions, TypeFindAll } from '@/types';
 import { useQuery } from 'react-query';
 import client from './client';
 import { API_ENDPOINTS } from './client/api-endpoints';
@@ -31,6 +31,23 @@ export function useType(slug: string) {
     () => client.types.get({ slug, language: locale! }),
     {
       enabled: Boolean(slug),
+    },
+  );
+  return {
+    type: data,
+    isLoading,
+    error,
+  };
+}
+
+export function useAllTypes() {
+  const { locale } = useRouter();
+  // NOTE: i am not adding any language support sytems
+  const { data, isLoading, error } = useQuery<TypeFindAll[], Error>(
+    [API_ENDPOINTS.ALLTYPESFIND],
+    () => client.types.findAll(),
+    {
+      enabled: true,
     },
   );
   return {

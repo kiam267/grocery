@@ -1,10 +1,13 @@
 import Image from 'next/image';
 import React from 'react';
+import { useAllTypes } from '../../framework/rest/type';
 import Button from '../ui/button';
 import Link from '../ui/link';
 import { ArrowNextIcon } from '../icons/arrow-next';
 import { LongArrowIcon } from '../icons/long-arrow-icon';
 import { ArrowRight } from '../icons/arrow-right';
+import ErrorMessage from '../ui/error-message';
+import { TypeFindAll } from '@/types';
 
 /* 
 UPDATED: 
@@ -52,124 +55,128 @@ const DISCOUNT_SHOP = [
   },
 ];
 
-//TODO: add some back behind the image
-function BannerWithDicount() {
+//TODO: first image padding need to update
+
+function BannerWithDicount({ type }: { type: TypeFindAll[] }) {
   return (
     <div className={'textClass relative  flex flex-col  justify-center my-5'}>
-      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 mt-16  px-2 lg:px-6">
+      <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 lg:mt-16 px-2 lg:px-6">
         {/* Left side large image */}
-        <div className="lg:col-span-2 flex flex-col items-center relative">
-          {DISCOUNT_SHOP.slice(0, 1).map((discountItem) => (
-            <div
-              key={discountItem.id}
-              className="relative w-full min-h-[250px] rounded-xl"
-            >
-              {/* Image with black overlay */}
-              <div className="relative">
-                <Image
-                  className="w-full h-full shadow-sm rounded-lg"
-                  loading="lazy"
-                  width={400}
-                  height={500}
-                  src={discountItem.image}
-                  alt={discountItem.title}
-                  title={discountItem.title}
-                />
-                {/* Black background overlay with opacity */}
-                <div className="absolute inset-0 bg-black opacity-5 rounded-lg"></div>
-              </div>
+        <div className="lg:col-span-2 flex flex-col items-center relative ">
+          {type
+            .filter((d) => d.slug === 'big')
+            .map((d) => (
+              <div
+                key={d.shop_id}
+                className="relative w-full h-full min-h-[250px] rounded-xl"
+              >
+                {/* Image with black overlay */}
+                <div className="relative h-full w-full">
+                  <Image
+                    className="w-full h-full  rounded-lg"
+                    loading="lazy"
+                    fill
+                    src={d.discount_image_url}
+                    alt={d.discount_title}
+                    title={d.discount_seo_title || d.discount_title}
+                  />
+                  {/* Black background overlay with opacity */}
+                  <div className="absolute inset-0 bg-black opacity-5 rounded-lg"></div>
+                </div>
 
-              {/* Content Overlay */}
-              <div className="absolute left-4 inset-y-0 flex items-center p-4 rounded-lg z-10">
-                {/* Discount and Button */}
-                <div>
-                  <div className="flex gap-4 items-center">
-                    <p className="text-black/80 font-semibold">
-                      {discountItem.discountContent}
-                    </p>
-                    <div className="rounded-xl bg-red-100 px-3 py-[2px] text-[13px] font-bold text-red-500">
-                      {discountItem.discountedPrice}
+                {/* Content Overlay */}
+                <div className="absolute left-4 inset-y-0 flex items-center p-4 rounded-lg z-10">
+                  {/* Discount and Button */}
+                  <div>
+                    <div className="flex gap-4 items-center">
+                      <p className="text-black/80 font-semibold">
+                        {/* {d.dic} NOTE: add table name that is discount_sort_title */}
+                      </p>
+                      <div className="rounded-xl bg-red-100 px-3 py-[2px] text-[13px] font-bold text-red-500">
+                        {d.discount_presentence}
+                      </div>
                     </div>
-                  </div>
-                  <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-black w-[80%] lg:w-[75%]">
-                    {discountItem.title.split(' ').slice(0, -2).join(' ')}{' '}
-                    <span className="text-accent">
-                      {discountItem.title.split(' ').slice(-2).join(' ')}
-                    </span>
-                  </h1>
-                  <Link href={discountItem.link} title={discountItem.title}>
-                    <Button
-                      type="button"
-                      className="flex justify-between items-center mt-3 rounded-2xl"
-                      name={discountItem.button}
-                    >
-                      <span>{discountItem.button}</span>
-                      <span>
-                        {' '}
-                        <p className="animate-left-to-right px-2">
-                          <ArrowRight className="w-5 h-5" />
-                        </p>
+                    <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-black w-[80%] lg:w-[75%]">
+                      {d.discount_title.split(' ').slice(0, -2).join(' ')}{' '}
+                      <span className="text-accent">
+                        {d.discount_title.split(' ').slice(-2).join(' ')}
                       </span>
-                    </Button>
-                  </Link>
+                    </h1>
+                    <Link href={d.shop_link} title={d.seo_title}>
+                      <Button
+                        type="button"
+                        className="flex justify-between items-center mt-3 rounded-2xl"
+                        name={d.button_name}
+                      >
+                        <span>{d.button_name}</span>
+                        <span>
+                          {' '}
+                          <p className="animate-left-to-right px-2">
+                            <ArrowRight className="w-5 h-5" />
+                          </p>
+                        </span>
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
 
         {/* Right side smaller images */}
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 grid-rows-2 xl:grid-rows-[50%] gap-5">
-          {DISCOUNT_SHOP.slice(1).map((discountItem) => (
-            <div
-              key={discountItem.id}
-              className="relative min-h-[250px] rounded-xl"
-            >
-              <Image
-                className=" w-full h-full min-h-[250px] object-cover shadow-sm rounded-lg"
-                loading="lazy"
-                src={discountItem.image}
-                alt={discountItem.title}
-                title={discountItem.title}
-                layout="fill"
-                objectFit="cover"
-              />
-              <div className="absolute inset-0 bg-black opacity-10 rounded-lg"></div>
-              <div className="absolute left-4 inset-y-0 flex items-center p-4 rounded-lg">
-                <div>
-                  <div className="flex gap-4 items-center">
-                    <p className="text-black/80 font-semibold">
-                      {discountItem.discountContent}
-                    </p>
-                    <div className="rounded-xl bg-red-100 px-3 py-[2px] text-[13px] font-bold text-red-500">
-                      {discountItem.discountedPrice}
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 grid-rows-1 xl:grid-rows-[50%] gap-5 ">
+          {type
+            .filter((d) => d.slug === 'medium')
+            .map((d) => (
+              <div
+                key={d.shop_id}
+                className="relative min-h-[250px] rounded-xl"
+              >
+                <Image
+                  className=" w-full h-full min-h-[240px] object-cover shadow-sm rounded-lg"
+                  loading="lazy"
+                  src={d.discount_image_url}
+                  alt={d.discount_title}
+                  title={d.discount_title}
+                  layout="fill"
+                  objectFit="cover"
+                />
+                <div className="absolute inset-0 bg-black opacity-10 rounded-lg"></div>
+                <div className="absolute left-4 inset-y-0 flex items-center p-4 rounded-lg">
+                  <div>
+                    <div className="flex gap-4 items-center">
+                      {/* <p className="text-black/80 font-semibold">
+                        {d.discountContent}
+                      </p> */}
+                      <div className="rounded-xl bg-red-100 px-3 py-[2px] text-[13px] font-bold text-red-500">
+                        {d.discount_presentence}
+                      </div>
                     </div>
-                  </div>
-                  <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-black w-[80%] lg:w-[75%]">
-                    {discountItem.title.split(' ').slice(0, -2).join(' ')}{' '}
-                    <span className="text-accent">
-                      {discountItem.title.split(' ').slice(-2).join(' ')}
-                    </span>
-                  </h1>
-                  <Link href={discountItem.link} title={discountItem.title}>
-                    <Button
-                      type="button"
-                      className="flex justify-between items-center mt-3 rounded-2xl"
-                      name={discountItem.button}
-                    >
-                      <span>{discountItem.button}</span>
-                      <span>
-                        {' '}
-                        <p className="animate-left-to-right px-2">
-                          <ArrowRight className="w-5 h-5" />
-                        </p>
+                    <h1 className="text-xl md:text-2xl font-bold text-black w-[80%] lg:w-[75%]">
+                      {d.discount_title.split(' ').slice(0, -2).join(' ')}{' '}
+                      <span className="text-accent">
+                        {d.discount_title.split(' ').slice(-2).join(' ')}
                       </span>
-                    </Button>
-                  </Link>
+                    </h1>
+                    <Link href={d.shop_link} title={d.discount_title}>
+                      <Button
+                        type="button"
+                        className="flex justify-between items-center mt-3 rounded-2xl"
+                        name={d.button_name}
+                      >
+                        <span>{d.button_name}</span>
+                        <span>
+                          {' '}
+                          <p className="animate-left-to-right px-2">
+                            <ArrowRight className="w-5 h-5" />
+                          </p>
+                        </span>
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
       </div>
     </div>

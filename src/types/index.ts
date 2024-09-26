@@ -338,6 +338,28 @@ export interface Type {
   };
 }
 
+export interface TypeFindAll {
+  click_count: boolean;
+  brand_name: string;
+  translated_languages: string[];
+  location?: string | string[];
+  discount_presentence: number;
+  discount_price?: number;
+  discount_title: string;
+  discount_description?: string;
+  discount_start_date?: string;
+  discount_end_date?: string;
+  discount_image_url: string;
+  discount_seo_title?: string;
+  regular_price?: number;
+  slug?: 'big' | 'medium' | 'slider' | 'side' | 'rectangle';
+  button_name?: string;
+  seo_title?: string;
+  shop_link: string;
+  shop_name?: string;
+  shop_id?: number;
+}[]
+
 export interface ShopAddress {
   country: string;
   city: string;

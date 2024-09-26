@@ -102,6 +102,7 @@ import type {
   NotifyLogs,
   BecomeSeller,
   ShopMaintenanceEvent,
+  TypeFindAll,
 } from '@/types';
 import { API_ENDPOINTS } from './api-endpoints';
 import { HttpClient } from './http-client';
@@ -240,7 +241,11 @@ class Client {
       HttpClient.get<Type[]>(API_ENDPOINTS.TYPES, params),
     get: ({ slug, language }: { slug: string; language: string }) =>
       HttpClient.get<Type>(`${API_ENDPOINTS.TYPES}/${slug}`, { language }),
+    findAll: async (): Promise<TypeFindAll[]> => {
+      return await HttpClient.get<TypeFindAll[]>(API_ENDPOINTS.ALLTYPESFIND);
+    },
   };
+
   shops = {
     all: (params: Partial<ShopQueryOptions>) =>
       HttpClient.get<ShopPaginator>(API_ENDPOINTS.SHOPS, {

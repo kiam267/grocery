@@ -7,15 +7,23 @@ import Categories from '../categories/categories';
 import ProductGridHome from '../products/grids/home';
 import { HomePageProps } from '@/types';
 import BannerWithDicount from '../banners/banner-with-discount';
+import { useAllTypes } from '../../framework/rest/type';
+import ErrorMessage from '../ui/error-message';
 
 function HeorDiscount({ variables }: HomePageProps) {
+  const { type, error } = useAllTypes();
+
+  if (error) return <ErrorMessage />;
+
+  if (!type) return null;
+
   return (
     <>
       {/* CHANGED: This components need to delete  */}
       {/* <Banner layout="classic" variables={variables.types} /> */}
       {/* ADD: this banner */}
-      <BannerWithDicount />
-      <PromotionSliders variables={variables.types} />
+      <BannerWithDicount type={type} />
+      <PromotionSliders type={type} variables={variables.types} />
       <FilterBar variables={variables.categories} />
       <Element
         name="grid"

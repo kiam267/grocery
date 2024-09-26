@@ -7,6 +7,8 @@ export const API_ENDPOINTS = {
   FEEDBACK: '/feedbacks',
   CATEGORIES: '/categories',
   TYPES: '/types',
+  // NOTE: add type
+  ALLTYPESFIND: '/types/all',
   TAGS: '/tags',
   SHOPS: '/shops',
   AUTHORS: '/authors',

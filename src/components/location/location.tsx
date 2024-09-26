@@ -31,8 +31,6 @@ function GetLocation() {
             )
               .then((response) => response.json())
               .then((data) => {
-                console.log(data, 'google api');
-
                 setLocation((pre) => {
                   return {
                     ...pre,
