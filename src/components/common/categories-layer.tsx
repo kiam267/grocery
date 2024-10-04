@@ -1,22 +1,26 @@
 import React from 'react';
 import StickySidebarListCategories from '../categories/sticky-sidebar-list-categories';
 import { useTranslation } from 'react-i18next';
-import { Category } from '@/types';
+import { Category, TypeFindAll } from '@/types';
+import AsidePromotionSlider from '../promotions/aside-promotion-slider';
 interface StickySidebarListCategoriesProps {
   notFound: boolean;
   loading: boolean;
   categories: Category[];
   className?: string;
+  variables: string;
+  type: TypeFindAll[];
 }
 function CatagoryLayer({
   notFound,
   categories,
   loading,
   className,
+  type,
 }: StickySidebarListCategoriesProps) {
   const { t } = useTranslation('common');
   return (
-    <div className="hidden md:block">
+    <div className="hidden xl:block">
       <div className="border bg-gray-100 m-3 rounded-lg">
         <h2 className="text-center  text-black text-2xl font-bold pt-3 pb-2">
           {t('text-category')}
@@ -32,8 +36,9 @@ function CatagoryLayer({
           // title={title}
         />
       </div>
-
-      
+      <div>
+        <AsidePromotionSlider sliders={type} />
+      </div>
     </div>
   );
 }

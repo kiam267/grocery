@@ -3,6 +3,7 @@ import dynamic from 'next/dynamic';
 import { useCategories } from '@/framework/category';
 import { useTranslation } from 'react-i18next';
 import CatagoryLayer from '../common/categories-layer';
+import { TypeFindAll } from '@/types';
 
 const StickySidebarListCategories = dynamic(
   () => import('@/components/categories/sticky-sidebar-list-categories'),
@@ -33,6 +34,8 @@ interface CategoriesProps {
   className?: string;
   title?: string;
   isHomeCatagories?: boolean;
+  variablesTypes: string;
+  type: TypeFindAll[] | [];
 }
 export default function Categories({
   layout,
@@ -40,6 +43,8 @@ export default function Categories({
   variables,
   title,
   isHomeCatagories,
+  type,
+  variablesTypes,
 }: CategoriesProps) {
   const { categories, isLoading, error } = useCategories(variables);
   const { t } = useTranslation('common');
@@ -54,6 +59,8 @@ export default function Categories({
           categories={categories}
           loading={isLoading}
           className={className}
+          type={type}
+          variables={variablesTypes}
         />
       ) : (
         <StickySidebarListCategories

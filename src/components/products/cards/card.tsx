@@ -27,6 +27,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
   className,
   ...props
 }) => {
+  console.log(product);
+
   const Component = product?.type?.settings?.productCard
     ? MAP_PRODUCT_TO_CARD[product?.type?.settings?.productCard]
     : Helium;
