@@ -59,7 +59,7 @@ const DISCOUNT_SHOP = [
 
 function BannerWithDicount({ type }: { type: TypeFindAll[] }) {
   return (
-    <div className={'textClass relative  flex flex-col  justify-center my-5'}>
+    <div className={'textClass relative  flex flex-col  justify-center my-10'}>
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 lg:mt-16 px-2 lg:px-6">
         {/* Left side large image */}
         <div className="lg:col-span-2 flex flex-col items-center relative ">

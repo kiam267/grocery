@@ -9,8 +9,10 @@ import { HomePageProps } from '@/types';
 import BannerWithDicount from '../banners/banner-with-discount';
 import { useAllTypes } from '../../framework/rest/type';
 import ErrorMessage from '../ui/error-message';
+import BannerWithPagination from '../banners/banner-with-pagination';
+import CompactLayout from '../layouts/compact';
 
-function HeorDiscount({ variables }: HomePageProps) {
+function ShopHome({ variables }: HomePageProps) {
   const { type, error } = useAllTypes();
 
   if (error) return <ErrorMessage />;
@@ -20,16 +22,25 @@ function HeorDiscount({ variables }: HomePageProps) {
   return (
     <>
       {/* CHANGED: This components need to delete  */}
-      {/* <Banner layout="classic" variables={variables.types} /> */}
+      {/* compact */}
+      {/* NOTE: edit me  */}
+      {/* <Banner layout="compact" variables={variables.types} /> */}
+
+      {/* <CompactLayout variables={variables} /> */}
       {/* ADD: this banner */}
+
+
+
+      <FilterBar variables={variables.categories} isHome/>
+
+
       <BannerWithDicount type={type} />
       <PromotionSliders type={type} variables={variables.types} />
-      <FilterBar variables={variables.categories} />
       <Element
         name="grid"
         className="flex border-t border-solid border-border-200 border-opacity-70"
-      >
-        <Categories layout="classic" variables={variables.categories} />
+        >
+        <Categories layout="classic" variables={variables.categories} isHomeCatagories/>
         <ProductGridHome
           className="px-4 pt-3.5 pb-16 lg:p-6 xl:p-8"
           variables={variables.products}
@@ -39,4 +50,4 @@ function HeorDiscount({ variables }: HomePageProps) {
   );
 }
 
-export default HeorDiscount;
+export default ShopHome;

@@ -1,92 +1,23 @@
 'use client';
 import axios from 'axios';
 import React, { useCallback, useEffect, useState } from 'react';
-import { MapPin, MapPinNew } from '../icons/map-pin';
+import { MapPin, MapPinNew, MapPinSlash } from '../icons/map-pin';
+import { useAtom } from 'jotai';
+import { atomWithStorage } from 'jotai/utils';
+import { useLocationBaseSearch } from '@/lib/use-location';
+
 
 function GetLocation() {
-  const [location, setLocation] = useState<{
-    lat: null | number;
-    lon: null | number;
-    city: string;
-    country: string;
-  }>({
-    lat: null,
-    lon: null,
-    city: '',
-    country: '',
-  });
-  const [loading, setLoading] = useState(true);
-  const [notfound, setNotFound] = useState(false);
-
-  const fetchData = useCallback(async () => {
-    try {
-      setLoading(true);
-
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            fetch(
-              `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`,
-            )
-              .then((response) => response.json())
-              .then((data) => {
-                setLocation((pre) => {
-                  return {
-                    ...pre,
-                    lat: latitude,
-                    lon: longitude,
-                    city: data.city,
-                    country: data.countryName,
-                  };
-                });
-              });
-          },
-
-          // if the user is not allowed the location then work this way
-          (error) => {
-            fetch('https://ipapi.co/json')
-              .then((response) => response.json())
-              .then((data) => {
-                console.log(data, 'ipapi api');
-                setLocation((pre) => {
-                  return {
-                    ...pre,
-                    city: data.city,
-                    country: data.country_name,
-                  };
-                });
-              });
-          },
-          {
-            enableHighAccuracy: true,
-            timeout: 5000,
-            maximumAge: 0,
-          },
-        );
-      } else {
-        setNotFound(true);
-      }
-    } catch (error) {
-      setNotFound(true);
-    } finally {
-      setLoading(false);
-    }
-  }, []);
-
-  useEffect(() => {
-    fetchData();
-  }, [fetchData]);
+  const { location, loading, notfound } = useLocationBaseSearch();
 
   if (loading) {
     return <div className="font-bold">Loading...</div>;
   }
 
-  if (notfound || location.city === null) {
+  if (notfound || location.city === (null || undefined)) {
     return (
-      <span className="flex items-center gap-1 text-base text-accent">
-        <MapPinNew className="w-4 h-4 " />
-        <p className="font-bold">not found</p>
+      <span className={` flex items-center gap-1 text-base text-accent `}>
+        <MapPinSlash className="w-4 h-4 " />
       </span>
     );
   }

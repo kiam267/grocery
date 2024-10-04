@@ -2,14 +2,14 @@ import { useType } from '@/framework/type';
 import dynamic from 'next/dynamic';
 const ErrorMessage = dynamic(() => import('@/components/ui/error-message'));
 const BannerWithSearch = dynamic(
-  () => import('@/components/banners/banner-with-search')
+  () => import('@/components/banners/banner-with-search'),
 );
 const BannerShort = dynamic(() => import('@/components/banners/banner-short'));
 const BannerWithoutSlider = dynamic(
-  () => import('@/components/banners/banner-without-slider')
+  () => import('@/components/banners/banner-without-slider'),
 );
 const BannerWithPagination = dynamic(
-  () => import('@/components/banners/banner-with-pagination')
+  () => import('@/components/banners/banner-with-pagination'),
 );
 const MAP_BANNER_TO_GROUP: Record<string, any> = {
   classic: BannerWithSearch,
@@ -27,6 +27,8 @@ const Banner: React.FC<{ layout: string; variables: any }> = ({
   const { type, error } = useType(variables.type);
   if (error) return <ErrorMessage message={error.message} />;
   const Component = MAP_BANNER_TO_GROUP[layout];
+
+  console.log(type);
   return (
     <Component banners={type?.banners} layout={layout} slug={type?.slug} />
   );

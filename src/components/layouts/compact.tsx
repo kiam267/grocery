@@ -20,6 +20,7 @@ export default function CompactLayout({ variables }: HomePageProps) {
         className="top-16 lg:hidden"
         variables={variables.categories}
       />
+
       <main className="block w-full mt-20 sm:mt-24 lg:mt-6 xl:overflow-hidden">
         <SectionBlock>
           <Banner layout="compact" variables={variables.types} />

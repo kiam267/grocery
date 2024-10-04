@@ -17,7 +17,7 @@ type EnvVariables = {
   readonly FACEBOOK_CLIENT_ID: string;
   readonly FACEBOOK_CLIENT_SECRET: string;
 };
-function getEnv(name: string, fallback?: string): string | undefined {
+export function getEnv(name: string, fallback?: string): string | undefined {
   const val = process.env[name] || fallback;
   if (!val) {
     throw new Error(`Cannot find environmental variable: ${name}`);

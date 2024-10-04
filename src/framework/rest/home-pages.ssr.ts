@@ -72,6 +72,7 @@ export const getStaticProps: GetStaticProps<
     ({ queryKey }) => client.types.all(queryKey[1] as TypeQueryOptions),
   );
 
+
   const { pages } = params!;
   let pageType: string | undefined;
   if (!pages) {

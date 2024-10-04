@@ -21,6 +21,8 @@ export default function BestSellingProductsGrid({
   variables,
   title,
 }: Props) {
+  console.log(className, (limit = 10), variables, title);
+  
   const { t } = useTranslation('common');
   const { products, isLoading, error } = useBestSellingProducts(variables);
 

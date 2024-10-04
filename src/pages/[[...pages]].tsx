@@ -9,7 +9,7 @@ import Seo from '@/components/seo/seo';
 import { useWindowSize } from '@/lib/use-window-size';
 import { getStaticPaths, getStaticProps } from '@/framework/home-pages.ssr';
 import { useType } from '@/framework/type';
-import HeorDiscount from '@/components/common/hero-discount';
+import ShopHome from '@/components/common/shop-home';
 
 export { getStaticPaths, getStaticProps };
 
@@ -33,7 +33,8 @@ const MAP_LAYOUT_TO_GROUP: Record<string, any> = {
 };
 const Home: NextPageWithLayout<
   InferGetStaticPropsType<typeof getStaticProps>
-> = ({ variables, layout }) => {
+  > = ({ variables, layout }) => {
+  
   const { query } = useRouter();
   const { width } = useWindowSize();
   const { type } = useType(variables.types.type);
@@ -48,6 +49,7 @@ const Home: NextPageWithLayout<
   }, [query.text, query.category]);
 
   const Component = MAP_LAYOUT_TO_GROUP['default'];
+
   return (
     <>
       <Seo
@@ -58,7 +60,7 @@ const Home: NextPageWithLayout<
       {/* FIXME:  if all ok then fix the page .  */}
       {/* <Component variables={variables} /> */}
 
-      <HeorDiscount layout="" variables={variables} />
+      <ShopHome layout="" variables={variables} />
 
       {!['compact', 'minimal'].includes(layout) && width > 1023 && (
         <CartCounterButton />

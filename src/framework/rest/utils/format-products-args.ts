@@ -10,6 +10,7 @@ export const formatProductsArgs = (options?: Partial<ProductQueryOptions>) => {
     searchType,
     searchQuery,
     text,
+    location,
     ...restOptions
   } = options || {};
 
@@ -22,5 +23,6 @@ export const formatProductsArgs = (options?: Partial<ProductQueryOptions>) => {
     ...(searchQuery && { name: searchQuery.toString() }),
     ...(text && { name: text.toString() }),
     ...restOptions,
+    location,
   };
 };

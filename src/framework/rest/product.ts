@@ -31,6 +31,8 @@ export function useProducts(options?: Partial<ProductQueryOptions>) {
     language: locale,
   };
 
+
+
   const {
     data,
     isLoading,
@@ -66,7 +68,6 @@ export function useProducts(options?: Partial<ProductQueryOptions>) {
     hasMore: Boolean(hasNextPage),
   };
 }
-
 export const usePopularProducts = (
   options?: Partial<PopularProductQueryOptions>,
 ) => {

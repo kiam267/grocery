@@ -28,7 +28,7 @@ export interface HomePageProps {
     bestSellingProducts?: any;
     categories: any;
     types: any;
-    layoutSettings: any;
+    layoutSettings?: any;
   };
   layout: string;
 }
@@ -95,6 +95,12 @@ export interface Attachment {
   slug?: string;
 }
 
+export interface MapPin {
+  lat: null | number;
+  lon: null | number;
+  city: string | undefined;
+  country?: string | undefined;
+}
 export interface ProductQueryOptions extends QueryOptions {
   shop_id: string;
   sortedBy: string;
@@ -113,6 +119,7 @@ export interface ProductQueryOptions extends QueryOptions {
   searchQuery: string;
   text: string;
   visibility: string;
+  location: MapPin;
 }
 
 export interface PopularProductQueryOptions extends QueryOptions {
@@ -358,7 +365,8 @@ export interface TypeFindAll {
   shop_link: string;
   shop_name?: string;
   shop_id?: number;
-}[]
+}
+[];
 
 export interface ShopAddress {
   country: string;

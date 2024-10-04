@@ -2,6 +2,7 @@ import { useProducts } from '@/framework/product';
 import { PRODUCTS_PER_PAGE } from '@/framework/client/variables';
 import { Grid } from '@/components/products/grid';
 import { useRouter } from 'next/router';
+import { useLocationBaseSearch } from '@/lib/use-location';
 interface Props {
   className?: string;
   variables: any;
@@ -15,14 +16,20 @@ export default function ProductGridHome({
   gridClassName,
 }: Props) {
   const { query } = useRouter();
+  const { location } = useLocationBaseSearch();
   const { products, loadMore, isLoadingMore, isLoading, hasMore, error } =
     useProducts({
       ...variables,
       ...(query.category && { categories: query.category }),
       ...(query.text && { name: query.text }),
+      location,
     });
   const productsItem: any = products;
+
   return (
+
+
+    
     <Grid
       products={productsItem}
       loadMore={loadMore}

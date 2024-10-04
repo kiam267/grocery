@@ -26,13 +26,14 @@ export function useTypes(options?: Partial<TypeQueryOptions>) {
 export function useType(slug: string) {
   const { locale } = useRouter();
 
-  const { data, isLoading, error } = useQuery<Type, Error>(
+  const { data, isLoading, error } = useQuery<Type , Error>(
     [API_ENDPOINTS.TYPES, { slug, language: locale }],
     () => client.types.get({ slug, language: locale! }),
     {
       enabled: Boolean(slug),
     },
   );
+ 
   return {
     type: data,
     isLoading,

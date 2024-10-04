@@ -43,7 +43,7 @@ const StickySidebarListCategories: React.FC<
   return (
     <aside
       className={classNames(
-        `hidden h-full bg-light lg:sticky xl:block xl:w-72 ${className}`,
+        `hidden h-full  lg:sticky xl:block xl:w-72  ${className}`,
         underMaintenanceIsComing ? '' : 'lg:top-22',
       )}
     >
@@ -75,14 +75,15 @@ const StickySidebarListCategories: React.FC<
           {!notFound ? (
             isClient ? (
               <div className="px-5">
-                <TreeMenu items={categories} className="xl:py-8" />
+                <TreeMenu items={categories} className="xl:py-8"  />
               </div>
             ) : (
               ''
             )
           ) : (
             <div className="min-h-full w-full px-9 pt-6 pb-8 lg:p-8">
-              <NotFound text="text-no-category" className="h-96" />
+                <NotFound text="text-no-category" className="h-96" />
+                
             </div>
           )}
         </div>

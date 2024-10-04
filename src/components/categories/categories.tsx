@@ -1,6 +1,8 @@
 import ErrorMessage from '@/components/ui/error-message';
 import dynamic from 'next/dynamic';
 import { useCategories } from '@/framework/category';
+import { useTranslation } from 'react-i18next';
+import CatagoryLayer from '../common/categories-layer';
 
 const StickySidebarListCategories = dynamic(
   () => import('@/components/categories/sticky-sidebar-list-categories'),
@@ -30,26 +32,39 @@ interface CategoriesProps {
   variables: any;
   className?: string;
   title?: string;
+  isHomeCatagories?: boolean;
 }
 export default function Categories({
   layout,
   className = '',
   variables,
   title,
+  isHomeCatagories,
 }: CategoriesProps) {
   const { categories, isLoading, error } = useCategories(variables);
-
+  const { t } = useTranslation('common');
   if (error) return <ErrorMessage message={error.message} />;
   const Component = MAP_CATEGORY_TO_GROUP[layout];
 
   return (
-    <Component
-      notFound={!Boolean(categories.length)}
-      categories={categories}
-      loading={isLoading}
-      className={className}
-      variables={variables}
-      title={title}
-    />
+    <>
+      {isHomeCatagories ? (
+        <CatagoryLayer
+          notFound={!Boolean(categories.length)}
+          categories={categories}
+          loading={isLoading}
+          className={className}
+        />
+      ) : (
+        <StickySidebarListCategories
+          notFound={!Boolean(categories.length)}
+          categories={categories}
+          loading={isLoading}
+          className={className}
+          // variables={variables}
+          // title={title}
+        />
+      )}
+    </>
   );
 }
