@@ -12,10 +12,10 @@ export default NextAuth({
     //   clientId: getEnv('FACEBOOK_CLIENT_ID'),
     //   clientSecret: getEnv('FACEBOOK_CLIENT_SECRET'),
     // }),
-    GoogleProvider({
-      clientId: getEnv('GOOGLE_CLIENT_ID') as string,
-      clientSecret: getEnv('GOOGLE_CLIENT_SECRET') as string,
-    }),
+    // GoogleProvider({
+    //   clientId: getEnv('GOOGLE_CLIENT_ID') as string,
+    //   clientSecret: getEnv('GOOGLE_CLIENT_SECRET') as string,
+    // }),
   ],
 
   // The secret should be set to a reasonably long random string.
