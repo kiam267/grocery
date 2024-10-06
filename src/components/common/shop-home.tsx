@@ -33,22 +33,27 @@ function ShopHome({ variables }: HomePageProps) {
 
       <FilterBar variables={variables.categories} isHome />
 
-      <BannerWithDicount type={type} />
-      <PromotionSliders type={type} variables={variables.types} />
+      <BannerWithDicount type={type.discountB} />
+      <PromotionSliders type={type.discountB} variables={variables.types} />
       <Element
         name="grid"
-        className="flex border-t border-solid border-border-200 border-opacity-70"
+        className="flex border-t border-solid border-border-200 border-opacity-70 "
       >
         <Categories
           layout="classic"
           variables={variables.categories}
           isHomeCatagories
-          type={type}
+          type={type.discountB}
           variablesTypes={variables.types}
         />
+
+
         <ProductGridHome
           className="px-4 pt-3.5 pb-16 lg:p-6 xl:p-8"
           variables={variables.products}
+        
+
+
         />
       </Element>
       <Footer />

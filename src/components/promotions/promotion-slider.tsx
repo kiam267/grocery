@@ -57,7 +57,7 @@ const offerSliderBreakpoints = {
 export default function PromotionSlider({
   sliders,
 }: {
-  sliders: TypeFindAll[];
+  sliders: TypeFindAll["discountB"];
 }) {
   const id = useId();
 

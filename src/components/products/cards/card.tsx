@@ -27,11 +27,24 @@ const ProductCard: React.FC<ProductCardProps> = ({
   className,
   ...props
 }) => {
-  console.log(product);
-
   const Component = product?.type?.settings?.productCard
     ? MAP_PRODUCT_TO_CARD[product?.type?.settings?.productCard]
     : Helium;
   return <Component product={product} {...props} className={className} />;
 };
+
+
 export default ProductCard;
+
+export const HomeProductCard: React.FC<ProductCardProps> = ({
+  product,
+  className,
+  ...props
+}) => {
+  const Component = product?.type?.settings?.productCard
+    ? MAP_PRODUCT_TO_CARD[product?.type?.settings?.productCard]
+    : Helium;
+  return <Krypton product={product} {...props} className={className} />;
+};
+
+

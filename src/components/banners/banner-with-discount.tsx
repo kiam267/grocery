@@ -57,7 +57,7 @@ const DISCOUNT_SHOP = [
 
 //TODO: first image padding need to update
 
-function BannerWithDicount({ type }: { type: TypeFindAll[] }) {
+function BannerWithDicount({ type }: { type: TypeFindAll['discountB'] }) {
   return (
     <div className={'textClass relative  flex flex-col  justify-center my-10'}>
       <div className="grid grid-cols-1 xl:grid-cols-3 gap-5 lg:mt-16 px-2 lg:px-6">

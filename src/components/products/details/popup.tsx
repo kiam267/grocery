@@ -13,6 +13,8 @@ interface ProductPopupProps {
   productSlug: string;
 }
 const Popup: React.FC<ProductPopupProps> = ({ productSlug }) => {
+  console.log(productSlug , "Product");
+
   const { t } = useTranslation('common');
   const [showStickyShortDetails] = useAtom(stickyShortDetailsAtom);
   const { product, isLoading } = useProduct({ slug: productSlug });

@@ -35,7 +35,7 @@ interface CategoriesProps {
   title?: string;
   isHomeCatagories?: boolean;
   variablesTypes: string;
-  type: TypeFindAll[] | [];
+  type: TypeFindAll['discountB'];
 }
 export default function Categories({
   layout,
@@ -46,6 +46,9 @@ export default function Categories({
   type,
   variablesTypes,
 }: CategoriesProps) {
+
+
+
   const { categories, isLoading, error } = useCategories(variables);
   const { t } = useTranslation('common');
   if (error) return <ErrorMessage message={error.message} />;

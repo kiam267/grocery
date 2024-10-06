@@ -9,7 +9,7 @@ interface StickySidebarListCategoriesProps {
   categories: Category[];
   className?: string;
   variables: string;
-  type: TypeFindAll[];
+  type: TypeFindAll['discountB'];
 }
 function CatagoryLayer({
   notFound,

@@ -125,8 +125,8 @@ class Client {
       ...params
     }: Partial<ProductQueryOptions>) =>
       HttpClient.get<ProductPaginator>(API_ENDPOINTS.PRODUCTS, {
-        // searchJoin: 'and',
-        // with: 'type;author',
+        searchJoin: 'and',
+        with: 'type;author',
         location,
         ...params,
         search: HttpClient.formatSearchParams({
@@ -243,8 +243,8 @@ class Client {
       HttpClient.get<Type[]>(API_ENDPOINTS.TYPES, params),
     get: ({ slug, language }: { slug: string; language: string }) =>
       HttpClient.get<Type>(`${API_ENDPOINTS.TYPES}/${slug}`, { language }),
-    findAll: async (): Promise<TypeFindAll[]> => {
-      return await HttpClient.get<TypeFindAll[]>(API_ENDPOINTS.ALLTYPESFIND);
+    findAll: async (): Promise<TypeFindAll> => {
+      return await HttpClient.get<TypeFindAll>(API_ENDPOINTS.ALLTYPESFIND);
     },
   };
 

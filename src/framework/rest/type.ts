@@ -44,7 +44,7 @@ export function useType(slug: string) {
 export function useAllTypes() {
   const { locale } = useRouter();
   // NOTE: i am not adding any language support sytems
-  const { data, isLoading, error } = useQuery<TypeFindAll[], Error>(
+  const { data, isLoading, error } = useQuery<TypeFindAll, Error>(
     [API_ENDPOINTS.ALLTYPESFIND],
     () => client.types.findAll(),
     {

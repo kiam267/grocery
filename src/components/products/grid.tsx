@@ -4,11 +4,15 @@ import Button from '@/components/ui/button';
 import ProductLoader from '@/components/ui/loaders/product-loader';
 import NotFound from '@/components/ui/not-found';
 import rangeMap from '@/lib/range-map';
-import ProductCard from '@/components/products/cards/card';
+import ProductCard, { HomeProductCard } from '@/components/products/cards/card';
 import ErrorMessage from '@/components/ui/error-message';
 import { useProducts } from '@/framework/product';
 import { PRODUCTS_PER_PAGE } from '@/framework/client/variables';
 import type { Product } from '@/types';
+import BestSellingProductsGrid from './best-selling-products';
+import Link from '../ui/link';
+import { Routes } from '@/config/routes';
+import PopularProductsGrid from './popular-products';
 
 interface Props {
   limit?: number;
@@ -84,6 +88,129 @@ export function Grid({
           </Button>
         </div>
       )}
+    </div>
+  );
+}
+export function GridHome({
+  className,
+  gridClassName,
+  products,
+  isLoading,
+  error,
+  loadMore,
+  isLoadingMore,
+  hasMore,
+  limit = PRODUCTS_PER_PAGE,
+  column = 'auto',
+}: Props) {
+  const { t } = useTranslation('common');
+
+  if (error) return <ErrorMessage message={error.message} />;
+
+  if (!isLoading && !products?.length) {
+    return (
+      <div className="w-full min-h-full px-4 pt-6 pb-8 lg:p-8">
+        <NotFound text="text-not-found" className="w-7/12 mx-auto" />
+      </div>
+    );
+  }
+
+  return (
+    <div className={cn('w-full mt-6', className)}>
+      {/* Top Sell */}
+      <div className="flex  flex-col ">
+        <h2 className="my-3 font-bold  text-3xl  text-black  p-2  rounded-lg w-fit px-10">
+          Top Save Today
+        </h2>
+        <BestSellingProductsGrid
+          variables={{ type: 'grocery', limit: 10 }}
+          limit={10}
+          column={column}
+        />
+        <div className="w-full flex items-center">
+          <div className="h-[60px] w-36">
+            <Link className="px-10" href={`/best-selling/${Routes.search}`}>
+              <Button className="" variant="outline">
+                See More
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+      {/* Best Seller */}
+      <div className="flex  flex-col ">
+        <h2 className="my-3 font-bold  text-3xl  text-black rounded-lg w-fit px-10">
+          Our best Seller
+        </h2>
+        <BestSellingProductsGrid
+          variables={{ type: 'grocery', limit: 10 }}
+          limit={10}
+          column={column}
+        />
+        <div className="w-full flex items-center">
+          <div className="h-[60px] w-36">
+            <Link className="px-10" href={`/best-selling/${Routes.search}`}>
+              <Button className="" variant="outline">
+                See More
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      <div className="flex  flex-col ">
+        <h2 className="my-3 font-bold  text-3xl  text-black  p-2  rounded-lg w-fit px-10">
+          Populer Products
+        </h2>
+        <PopularProductsGrid
+          variables={{ type: 'grocery', limit: 10 }}
+          limit={10}
+          column={column}
+        />
+        <div className="w-full flex items-center">
+          <div className="h-[60px] w-36">
+            <Link className="px-10" href={`/best-selling/${Routes.search}`}>
+              <Button className="" variant="outline">
+                See More
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* <div
+        className={cn(
+          {
+            'grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-3':
+              column === 'auto',
+            'grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-6 gap-y-10 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] xl:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] xl:gap-8 xl:gap-y-11 2xl:grid-cols-5 3xl:grid-cols-[repeat(auto-fill,minmax(360px,1fr))]':
+              column === 'five',
+            'grid grid-cols-[repeat(auto-fill,minmax(260px,1fr))] gap-4 md:gap-6 lg:grid-cols-[repeat(auto-fill,minmax(200px,1fr))] xl:grid-cols-[repeat(auto-fill,minmax(220px,1fr))] 2xl:grid-cols-5 3xl:grid-cols-[repeat(auto-fill,minmax(360px,1fr))]':
+              column === 'six',
+          },
+          gridClassName,
+          'px-10 pb-[40px]',
+        )}
+      >
+        {isLoading && !products?.length
+          ? rangeMap(limit, (i) => (
+              <ProductLoader key={i} uniqueKey={`product-${i}`} />
+            ))
+          : products?.map((product) => (
+              <HomeProductCard product={product} key={product.id} />
+            ))}
+      </div> */}
+      {/* {hasMore && (
+        <div className="flex justify-center mt-8 mb-4 sm:mb-6 lg:mb-2 lg:mt-12">
+          <Button
+            loading={isLoadingMore}
+            onClick={loadMore}
+            className="text-sm font-semibold h-11 md:text-base"
+          >
+            {t('text-load-more')}
+          </Button>
+        </div>
+      )} */}
     </div>
   );
 }

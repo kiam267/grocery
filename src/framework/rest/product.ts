@@ -31,7 +31,7 @@ export function useProducts(options?: Partial<ProductQueryOptions>) {
     language: locale,
   };
 
-
+  console.log(formattedOptions);
 
   const {
     data,

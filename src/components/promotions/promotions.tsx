@@ -8,10 +8,11 @@ export default function PromotionSliders({
   type,
 }: {
   variables: string;
-  type: TypeFindAll[];
+  type: TypeFindAll["discountB"];
 }) {
   // const { type, error } = useType(variables.type);
 
+  console.log(type);
   // if (error) return <ErrorMessage message={error.message} />;
   if (!type) return null;
   return <PromotionSlider sliders={type} />;
