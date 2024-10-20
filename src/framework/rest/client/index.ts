@@ -409,7 +409,7 @@ class Client {
       }),
   };
   users = {
-    me: () => HttpClient.get<User>(API_ENDPOINTS.USERS_ME),
+    me: (token: string) => HttpClient.get<User>(API_ENDPOINTS.USERS_ME, {token}),
     update: (user: UpdateUserInput) =>
       HttpClient.put<User>(`${API_ENDPOINTS.USERS}/${user.id}`, user),
     login: (input: LoginUserInput) =>

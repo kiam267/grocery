@@ -36,16 +36,18 @@ import {
   useQueryClient,
 } from 'react-query';
 import { toast } from 'react-toastify';
+import { AUTH_TOKEN_KEY } from '@/lib/constants';
 
 export function useUser() {
   const [isAuthorized] = useAtom(authorizationAtom);
   const { setEmailVerified, getEmailVerified } = useToken();
   const { emailVerified } = getEmailVerified();
   const router = useRouter();
+  const token = Cookies.get(AUTH_TOKEN_KEY);
 
   const { data, isLoading, error, isFetchedAfterMount } = useQuery(
-    [API_ENDPOINTS.USERS_ME],
-    client.users.me,
+    [API_ENDPOINTS.USERS_ME, token],
+    () => client.users.me,
     {
       enabled: isAuthorized,
       retry: false,

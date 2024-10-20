@@ -137,7 +137,7 @@ const Maintenance = ({ children }: MaintenanceProps) => {
 
   // Use useEffect to run the promo popup only once
   useEffect(() => {
-    handlePromoPopup();
+    // handlePromoPopup();
   }, [handlePromoPopup]);
 
   // Use useCallback to avoid creating new functions on every render
