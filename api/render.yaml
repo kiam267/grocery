@@ -1,0 +1,5 @@
+services:
+  - type: web
+    runtime: node
+    buildCommand: yarn build
+    startCommand: node dist/main.js

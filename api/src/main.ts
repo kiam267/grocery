@@ -40,7 +40,7 @@ import * as os from 'os';
     SwaggerModule.setup('docs', app, document);
 
     const PORT = process.env.PORT || 5000;
-    await app.listen(PORT);
+    await app.listen(PORT, '0.0.0.0');
     console.log(`Application is running on: ${await app.getUrl()}/api`);
   }
 bootstrap();
