@@ -156,7 +156,4 @@ const GroupsDropdownMenu: React.FC<GroupsDropdownMenuProps> = ({ variant }) => {
   );
 };
 
-
-
-
 export default GroupsDropdownMenu;

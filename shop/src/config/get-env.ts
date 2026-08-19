@@ -5,8 +5,8 @@ type EnvVariables = {
   readonly NEXT_PUBLIC_REST_API_ENDPOINT: string;
   readonly NEXT_PUBLIC_GRAPHQL_API_ENDPOINT: string;
   readonly NEXT_PUBLIC_DEFAULT_LANGUAGE: string;
-  readonly NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string;
-  readonly NEXT_PUBLIC_RAZORPAY_PUBLISHABLE_KEY: string;
+  // readonly NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY: string;
+  // readonly NEXT_PUBLIC_RAZORPAY_PUBLISHABLE_KEY: string;
   readonly NEXT_PUBLIC_STRIPE_PAYMENT_ELEMENT_REDIRECT_URL: string;
   readonly NEXT_PUBLIC_SITE_URL: string;
   readonly NEXT_PUBLIC_ADMIN_URL: string;
@@ -17,8 +17,10 @@ type EnvVariables = {
   readonly FACEBOOK_CLIENT_ID: string;
   readonly FACEBOOK_CLIENT_SECRET: string;
 };
-function getEnv(name: string, fallback?: string): string | undefined {
-  const val = process.env[name] || fallback;
+export function getEnv(
+  name: keyof EnvVariables
+): EnvVariables[keyof EnvVariables] {
+  const val = process.env[name];
   if (!val) {
     throw new Error(`Cannot find environmental variable: ${name}`);
   }

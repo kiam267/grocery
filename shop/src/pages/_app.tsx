@@ -27,7 +27,7 @@ type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
-function App({
+function CustomApp({
   Component,
   pageProps: {
     //@ts-ignore
@@ -76,4 +76,4 @@ function App({
   );
 }
 
-export default appWithTranslation(App);
+export default appWithTranslation(CustomApp);

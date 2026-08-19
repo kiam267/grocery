@@ -37,7 +37,7 @@ Axios.interceptors.response.use(
       Router.replace(Routes.home);
     }
     return Promise.reject(error);
-  },
+  }
 );
 
 export class HttpClient {
@@ -65,16 +65,9 @@ export class HttpClient {
     return Object.entries(params)
       .filter(([, value]) => Boolean(value))
       .map(([k, v]) =>
-        [
-          'type',
-          'categories',
-          'tags',
-          'author',
-          'manufacturer',
-          'shops',
-        ].includes(k)
+        ['type', 'categories', 'tags', 'author', 'manufacturer','shops'].includes(k)
           ? `${k}.slug:${v}`
-          : `${k}:${v}`,
+          : `${k}:${v}`
       )
       .join(';');
   }

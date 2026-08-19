@@ -8,12 +8,6 @@
 # testing
 /coverage
 
-# others folders
-../admin/
-../api/
-../nest/
-../vendor/
-
 # next.js
 /.next/
 /out/
@@ -31,7 +25,7 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-# .env
+.env
 .env*.local
 # vercel
 .vercel
@@ -55,5 +49,4 @@ package.default.json
 package.graphql.json
 
 .graphql-let.general.yml
-.graphql-let.windows.yml.next/
-.next/
+.graphql-let.windows.yml
