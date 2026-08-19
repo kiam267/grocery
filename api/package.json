@@ -6,11 +6,11 @@
   "private": true,
   "license": "UNLICENSED",
   "engines": {
-    "node": "24.x"
+    "node": "20.x"
   },
   "scripts": {
     "prebuildok": "rimraf dist",
-    "prebuild": "rm -rf dist",
+    "prebuild": "rimraf dist",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
