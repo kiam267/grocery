@@ -5,6 +5,9 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+  "engines": {
+    "node": "24.x"
+  },
   "scripts": {
     "prebuildok": "rimraf dist",
     "prebuild": "rm -rf dist",
@@ -34,7 +37,6 @@
     "class-validator": "^0.13.2",
     "fuse.js": "^6.6.2",
     "nestjs-stripe": "^1.0.0",
-    "node": "^22.6.0",
     "paypal-rest-sdk": "^1.8.1",
     "qs": "^6.11.0",
     "reflect-metadata": "^0.1.13",
@@ -81,8 +83,5 @@
     ],
     "coverageDirectory": "../coverage",
     "testEnvironment": "node"
-  },
-  "engines": {
-    "node": "20.18.0"
   }
 }
